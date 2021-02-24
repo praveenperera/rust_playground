@@ -1,0 +1,11 @@
+[package]
+authors = ["Praveen Perera <praveen@avencera.com>"]
+edition = "2018"
+name = "strs"
+version = "0.1.0"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+easybench = "1"
+itertools = "0.10"
