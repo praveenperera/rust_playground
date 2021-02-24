@@ -36,9 +36,10 @@ fn iter() -> String {
 
     for str in strs {
         string.push_str(str);
-        string.push_str(" ")
+        string.push(' ')
     }
 
+    string.pop();
     string
 }
 
