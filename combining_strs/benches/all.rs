@@ -32,10 +32,10 @@ fn prefixing(c: &mut Criterion) {
     let mut group = c.benchmark_group("Prefixing");
 
     let string = "abcdef".to_string();
-    group.bench_function("prefix_collect", move |b| {
+    group.bench_function("prefix_with_format", move |b| {
         b.iter_batched(
             || string.clone(),
-            |s| prefix_collect(black_box(s)),
+            |s| prefix_with_format(black_box(s)),
             BatchSize::SmallInput,
         )
     });
@@ -44,7 +44,16 @@ fn prefixing(c: &mut Criterion) {
     group.bench_function("prefix_string_capacity", move |b| {
         b.iter_batched(
             || string.clone(),
-            |s| prefix_string_capacity(black_box(s)),
+            |s| prefix_with_string_capacity(black_box(s)),
+            BatchSize::SmallInput,
+        )
+    });
+
+    let string = "abcdef".to_string();
+    group.bench_function("prefix_collect", move |b| {
+        b.iter_batched(
+            || string.clone(),
+            |s| prefix_collect(black_box(s)),
             BatchSize::SmallInput,
         )
     });

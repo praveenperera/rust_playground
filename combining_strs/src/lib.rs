@@ -52,22 +52,23 @@ pub fn join_iter_chars() -> String {
 }
 
 #[inline]
-pub fn prefix_collect(string: String) -> String {
-    let mut s = vec!['a', 'b', 'c', 'd', 'e', 'f'];
-
-    for char in string.chars() {
-        s.push(char)
-    }
-
-    s.iter().collect()
+pub fn prefix_with_format(string: String) -> String {
+    let prefix = format!("{}-{}", "abcdef", "prefix");
+    format!("{}{}", prefix, string)
 }
 
 #[inline]
-pub fn prefix_string_capacity(string: String) -> String {
-    let prefix = vec!['a', 'b', 'c', 'd', 'e', 'f'];
-    let mut s = String::with_capacity(prefix.len() + string.len());
+pub fn prefix_with_string_capacity(string: String) -> String {
+    let prefix: Vec<char> = "abcdef".chars().collect();
+    let mut s = String::with_capacity(prefix.len() + string.len() + "prefix".len());
 
     for char in prefix {
+        s.push(char)
+    }
+
+    s.push('-');
+
+    for char in "prefix".chars() {
         s.push(char)
     }
 
@@ -76,6 +77,23 @@ pub fn prefix_string_capacity(string: String) -> String {
     }
 
     s
+}
+
+#[inline]
+pub fn prefix_collect(string: String) -> String {
+    let mut s: Vec<char> = "abcdef".chars().collect();
+
+    s.push('-');
+
+    for char in "prefix".chars() {
+        s.push(char)
+    }
+
+    for char in string.chars() {
+        s.push(char)
+    }
+
+    s.iter().collect()
 }
 
 #[inline]
