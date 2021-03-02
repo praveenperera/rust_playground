@@ -35,7 +35,7 @@ fn prefixing(c: &mut Criterion) {
     group.bench_function("prefix_collect", move |b| {
         b.iter_batched(
             || string.clone(),
-            |s| prefix_collect(criterion::black_box(s)),
+            |s| prefix_collect(black_box(s)),
             BatchSize::SmallInput,
         )
     });
@@ -44,7 +44,7 @@ fn prefixing(c: &mut Criterion) {
     group.bench_function("prefix_string_capacity", move |b| {
         b.iter_batched(
             || string.clone(),
-            |s| prefix_string_capacity(criterion::black_box(s)),
+            |s| prefix_string_capacity(black_box(s)),
             BatchSize::SmallInput,
         )
     });
