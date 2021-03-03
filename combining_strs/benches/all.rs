@@ -41,10 +41,28 @@ fn prefixing(c: &mut Criterion) {
     });
 
     let string = "abcdef".to_string();
-    group.bench_function("prefix_string_capacity", move |b| {
+    group.bench_function("prefix_split_with_string_capacity", move |b| {
+        b.iter_batched(
+            || string.clone(),
+            |s| prefix_split_with_string_capacity(black_box(s)),
+            BatchSize::SmallInput,
+        )
+    });
+
+    let string = "abcdef".to_string();
+    group.bench_function("prefix_with_string_capacity", move |b| {
         b.iter_batched(
             || string.clone(),
             |s| prefix_with_string_capacity(black_box(s)),
+            BatchSize::SmallInput,
+        )
+    });
+
+    let string = "abcdef".to_string();
+    group.bench_function("prefix_split_with_string_capacity_chain_iter", move |b| {
+        b.iter_batched(
+            || string.clone(),
+            |s| prefix_split_with_string_capacity_chain_iter(black_box(s)),
             BatchSize::SmallInput,
         )
     });

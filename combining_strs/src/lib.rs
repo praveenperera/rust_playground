@@ -58,6 +58,41 @@ pub fn prefix_with_format(string: String) -> String {
 }
 
 #[inline]
+pub fn prefix_split_with_string_capacity(string: String) -> String {
+    let prefix = "abcdef".split("");
+
+    let mut s = String::with_capacity("abcdef".len() + string.len() + "prefix".len());
+
+    for str in prefix {
+        s.push_str(str)
+    }
+
+    s.push('-');
+
+    for char in "prefix".chars() {
+        s.push(char)
+    }
+
+    for char in string.chars() {
+        s.push(char)
+    }
+
+    s
+}
+
+#[inline]
+pub fn prefix_split_with_string_capacity_chain_iter(string: String) -> String {
+    let mut s = String::with_capacity("abcdef".len() + string.len() + "prefix".len());
+    "abcdef".split("").for_each(|str| s.push_str(str));
+    s.push('-');
+    "prefix"
+        .chars()
+        .chain(string.chars())
+        .for_each(|char| s.push(char));
+    s
+}
+
+#[inline]
 pub fn prefix_with_string_capacity(string: String) -> String {
     let prefix: Vec<char> = "abcdef".chars().collect();
     let mut s = String::with_capacity(prefix.len() + string.len() + "prefix".len());
